@@ -4,7 +4,7 @@ import requests
 import time
 
 tickers = ["EMA"]
-data = []
+
 
 for ticker in tickers:
     page_url = "http://ca.dividendinvestor.com/?symbol=" + ticker + "&submit=GO"
@@ -13,18 +13,17 @@ for ticker in tickers:
     page_content = BeautifulSoup(page_response.content)
     
     tbl = page_content.find_all("table")[15] #div data is in the 16th table tag
+    rows = tbl.findChildren("tr")   #go through each row
 
-    #go through each row then column
-    rows = tbl.find_all("tr")  
     for row in rows:
-        #get the columns in each row
-        cols = row.find_all("td")
-        cols = [ele.text.strip() for ele in cols]
-        data.append([ele for ele in cols if ele])
+        cells = row.findChildren("td")
+        #consider shoving everything into a dictionary and filtering it for what I want later
+        for cell in cells:
+            print(cell.string)
 
-    print(data)
-    #need to add code here to strip out the key info
+        #need to append the data to a list somehow
+
+    #need to only grab the div dates
+    #need to compare dates
+
     time.sleep(1) #wait a second between requests
-
-#use the key info found
-
