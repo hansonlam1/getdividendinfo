@@ -19,8 +19,11 @@ for ticker in tickers:
 
     for row in rows:
         cell = row.find("td")
-        if cell.string=="Dividend Pay Date:":
+        if cell.string=="Dividend Pay Date: ":  #note the extra space in the label
             print(cell.string)
+        if cell.string=="Dividend Ex Date: ":
+            print(cell.string)
+        
 
     #main_dict.update(ticker_dict)   #add the ticker dictionary to the main one
     time.sleep(1) #wait a second between requests
