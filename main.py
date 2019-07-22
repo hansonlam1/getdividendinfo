@@ -18,16 +18,11 @@ for ticker in tickers:
     tbl = page_content.find_all("table")[15] #div data is in the 16th table tag
     rows = tbl.findChildren("tr")   #go through each row
 
-    for row in rows:    #put everything into a dictionary
-        cells = row.findChildren("td")
-        for cell in cells:
-            #we only want the rows with two values
-            print(cell.string)  #build a dictionary to pass into a pandas dataframe later?
+    for row in rows:
+        cell = row.find("td")
+        #if cell.text=="Dividend Pay Date:":
+        print(cell.string)
 
-        #need to append the data to a list somehow
-
-    #need to only grab the div dates
-    #need to compare dates
-
-    main_dict.update(ticker_dict)   #add the ticker dictionary to the main one
+    #main_dict.update(ticker_dict)   #add the ticker dictionary to the main one
     time.sleep(1) #wait a second between requests
+print("done")
