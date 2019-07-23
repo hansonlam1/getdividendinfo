@@ -7,3 +7,4 @@ I want to know which stocks are paying dividends in the upcoming few days.
 #To Do
 - parameterize some settings
 - import lists of tickers from various sources
+- handle none and not found rows
