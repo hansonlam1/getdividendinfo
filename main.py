@@ -5,7 +5,9 @@ import time
 import pandas as pd
 from datetime import datetime, timedelta
 
-tickers = ["EMA"]
+maxdate = datetime.now() + timedelta(days=7)
+tickers = pd.read_csv("https://web.tmxmoney.com/constituents_data.php?index=^TX60&index_name=S%26P%2FTSX+60+Index+%28CAD%29",skiprows=4)
+tickers = tickers["Symbol"].tolist()
 main_df = pd.DataFrame()
 
 for ticker in tickers:
@@ -25,7 +27,9 @@ for ticker in tickers:
     main_df = main_df.append(ticker_dict,ignore_index=True)
 
 time.sleep(0.3) #throttle it a bit
+
 main_df["Dividend Pay Date:"]=pd.to_datetime(main_df["Dividend Pay Date:"])
 main_df["Dividend Ex Date:"]=pd.to_datetime(main_df["Dividend Ex Date:"])
 main_df["Dividend Record Date:"]=pd.to_datetime(main_df["Dividend Record Date:"])
+main_df = main_df[main_df["Dividend Pay Date:"]<=maxdate]
 main_df[["ticker","Dividend Ex Date:","Dividend Pay Date:"]]
