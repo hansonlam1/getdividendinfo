@@ -24,7 +24,7 @@ for ticker in tickers:
         if len(cells) > 1:  #only want rows with two cells
             ticker_dict.update({cells[0].text.strip():cells[1].text.strip()})
     main_df = main_df.append(ticker_dict,ignore_index=True)
-time.sleep(0.7) #throttle it a bit
+time.sleep(0.3) #throttle it a bit
 
 main_df["Dividend Pay Date:"]=pd.to_datetime(main_df["Dividend Pay Date:"])
 main_df["Dividend Ex Date:"]=pd.to_datetime(main_df["Dividend Ex Date:"])
