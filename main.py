@@ -6,7 +6,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import tickerlist
 
-maxdate = datetime.now() + timedelta(days=14)
+maxdate = datetime.now() + timedelta(days=7)
 tickers = tickerlist.TICKERLIST
 main_df = pd.DataFrame()
 
