@@ -24,11 +24,16 @@ for ticker in tickers:
         if len(cells) > 1:  #only want rows with two cells
             ticker_dict.update({cells[0].text.strip():cells[1].text.strip()})
     main_df = main_df.append(ticker_dict,ignore_index=True)
-time.sleep(0.3) #throttle it a bit
+    print("Processing: " + ticker)
+time.sleep(0.2) #throttle it a bit
+
+#filter rows that do not have a div pay date
+main_df = main_df.loc[main_df["Dividend Pay Date:"] != "None"]
 
 main_df["Dividend Pay Date:"]=pd.to_datetime(main_df["Dividend Pay Date:"])
 main_df["Dividend Ex Date:"]=pd.to_datetime(main_df["Dividend Ex Date:"])
 main_df["Dividend Record Date:"]=pd.to_datetime(main_df["Dividend Record Date:"])
-#main_df = main_df[main_df["Dividend Pay Date:"]<=maxdate]
+
 main_df = main_df[(main_df["Dividend Pay Date:"]<=maxdate) & (main_df["Dividend Pay Date:"] >= datetime.now())]
+main_df.sort_values(by=["Dividend Pay Date:"], inplace=True, ascending=True)
 main_df[["ticker","Dividend Pay Date:"]]
