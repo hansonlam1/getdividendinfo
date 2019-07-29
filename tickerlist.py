@@ -15,6 +15,7 @@ TICKERLIST = [
     "FTS",
     "GWO",
     "IPL",
+    "LB",
     "MFC",
     "NA",
     "RY",
